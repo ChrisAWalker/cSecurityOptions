@@ -3,6 +3,17 @@ This PowerShell DSC Module is designed to modify Windows security options. The f
 
 You can also download this module from the [PowerShell Gallery](http://www.powershellgallery.com/packages/cSecurityOptions).
 
+## Feedback loop
+This code is being leveraged in a large enterprise.  This is being actively maintained as of January 2016.  I welcome feedback and pull requests to make this better.
+
+##Contributing
+1. Fork the repository on Github
+2. Create a named feature branch (like `add_component_x`)
+3. Write your change
+4. Write tests for your change (if applicable) - this is currently (1/21/2016) light
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request using Github
+
 ## Example
 
 ```powershell
