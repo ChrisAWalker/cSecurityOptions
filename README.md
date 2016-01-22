@@ -38,7 +38,8 @@ Start-DscConfiguration -Path URA -Wait -Verbose -Force -Debug
 ```
 
 ##Resources
-# The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
+```
+The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
 SeTrustedCredManAccessPrivilege = '' # Access Credential Manager as a trusted caller
 SeNetworkLogonRight = 'Everyone', 'BUILTIN\Administrators', 'BUILTIN\Users', 'BUILTIN\Backup Operators' # Access this computer from the network
 SeTcbPrivilege = '' # Act as part of the operating system
@@ -85,3 +86,4 @@ SeRestorePrivilege = 'BUILTIN\Administrators', 'BUILTIN\Backup Operators' # Rest
 SeShutdownPrivilege = 'BUILTIN\Administrators', 'BUILTIN\Backup Operators' # Shut down the system
 SeSyncAgentPrivilege = '' # Synchronize directory service data
 SeTakeOwnershipPrivilege = 'BUILTIN\Administrators' # Take ownership of files or other objects
+```
