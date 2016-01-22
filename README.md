@@ -4,7 +4,8 @@ This PowerShell DSC Module is designed to modify Windows security options. The f
 You can also download this module from the [PowerShell Gallery](http://www.powershellgallery.com/packages/cSecurityOptions).
 
 ## Example
-'''powershell
+
+```powershell
 configuration URA 
 {
     Import-DscResource -ModuleName cSecurityOptions
@@ -22,6 +23,7 @@ configuration URA
 
 URA
 Start-DscConfiguration -Path URA -Wait -Verbose -Force -Debug
+
 ```
 
 ##Resources
