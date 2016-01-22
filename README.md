@@ -3,7 +3,20 @@ This PowerShell DSC Module is designed to modify Windows security options. The f
 
 You can also download this module from the [PowerShell Gallery](http://www.powershellgallery.com/packages/cSecurityOptions).
 
+## Feedback loop
+This code is being leveraged in a large enterprise.  This is being actively maintained as of January 2016.  I welcome feedback and pull requests to make this better.
+
+##Contributing
+1. Fork the repository on Github
+2. Create a named feature branch (like `add_component_x`)
+3. Write your change
+4. Write tests for your change (if applicable) - this is currently (1/21/2016) light
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request using Github
+
 ## Example
+
+```powershell
 configuration URA 
 {
     Import-DscResource -ModuleName cSecurityOptions
@@ -22,9 +35,11 @@ configuration URA
 URA
 Start-DscConfiguration -Path URA -Wait -Verbose -Force -Debug
 
+```
 
-###Resources
-# The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
+##Resources
+```
+The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
 SeTrustedCredManAccessPrivilege = '' # Access Credential Manager as a trusted caller
 SeNetworkLogonRight = 'Everyone', 'BUILTIN\Administrators', 'BUILTIN\Users', 'BUILTIN\Backup Operators' # Access this computer from the network
 SeTcbPrivilege = '' # Act as part of the operating system
@@ -71,6 +86,4 @@ SeRestorePrivilege = 'BUILTIN\Administrators', 'BUILTIN\Backup Operators' # Rest
 SeShutdownPrivilege = 'BUILTIN\Administrators', 'BUILTIN\Backup Operators' # Shut down the system
 SeSyncAgentPrivilege = '' # Synchronize directory service data
 SeTakeOwnershipPrivilege = 'BUILTIN\Administrators' # Take ownership of files or other objects
-
-
 ```
