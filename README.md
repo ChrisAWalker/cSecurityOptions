@@ -42,7 +42,55 @@ Start-DscConfiguration -Path URA -Wait -Verbose -Force -Debug
 
 ```
 
-##Resources
+```powershell
+configuration AdvancedAudit
+{
+    Import-DscResource -ModuleName cSecurityOptions
+
+    Node localhost
+    {
+        AdvancedAuditing AdvancedAuditSetting
+        {
+            Category = "Account Logon;Credential Validation"
+            # "System;IPsec Driver","System;System Integrity","System;Security System Extension","System;Security State Change","System;Other System Events","Logon/Logoff;Network Policy Server","Logon/Logoff;Other Logon/Logoff Events","Logon/Logoff;Special Logon","Logon/Logoff;IPsec Extended Mode","Logon/Logoff;IPsec Quick Mode","Logon/Logoff;IPsec Main Mode","Logon/Logoff;Account Lockout","Logon/Logoff;Logoff","Logon/Logoff;Logon","Logon/Logoff;User / Device Claims","Object Access;SAM","Object Access;Kernel Object","Object Access;Registry","Object Access;Application Generated","Object Access;Handle Manipulation","Object Access;File Share","Object Access;Filtering Platform Packet Drop","Object Access;Filtering Platform Connection","Object Access;Other Object Access Events","Object Access;Detailed File Share","Object Access;Removable Storage","Object Access;Central Policy Staging","Object Access;Certification Services","Object Access;File System","Privilege Use;Other Privilege Use Events","Privilege Use;Non Sensitive Privilege Use","Privilege Use;Sensitive Privilege Use","Detailed Tracking;RPC Events","Detailed Tracking;DPAPI Activity","Detailed Tracking;Process Termination","Detailed Tracking;Process Creation","Policy Change;Audit Policy Change","Policy Change;MPSSVC Rule-Level Policy Change","Policy Change;Filtering Platform Policy Change","Policy Change;Authorization Policy Change","Policy Change;Authentication Policy Change","Policy Change;Other Policy Change Events","Account Management;Security Group Management","Account Management;Distribution Group Management","Account Management;Other Account Management Events","Account Management;Application Group Management","Account Management;Computer Account Management","Account Management;User Account Management","DS Access;Directory Service Changes","DS Access;Directory Service Replication","DS Access;Directory Service Access","DS Access;Detailed Directory Service Replication","Account Logon;Other Account Logon Events","Account Logon;Kerberos Service Ticket Operations","Account Logon;Credential Validation","Account Logon;Kerberos Authentication Service"
+            AuditLevel = 'No Auditing'
+            #AuditLevel = "Success"
+            #AuditLevel = "Failure"
+            #AuditLevel = "Success and Failure"
+            # "No Auditing","Success","Failure","Success and Failure"
+        }
+    }
+}
+
+AdvancedAudit
+Start-DscConfiguration -Path AdvancedAudit -Wait -Verbose -Force -Debug
+
+```
+
+```powershell
+configuration SecurityAuditOptions
+{
+    Import-DscResource -ModuleName cSecurityOptions
+
+    Node localhost
+    {
+        AdvancedAuditOptions AuditBaseDirectories
+        {
+            AdvancedAuditOption = 'AuditBaseDirectories'
+            # "CrashOnAuditFail","FullPrivilegeAuditing","AuditBaseObjects","AuditBaseDirectories"
+            Ensure = 'Disabled'
+            #Ensure = 'Enabled'
+            # "Enabled", "Disabled"
+        }
+    }
+}
+
+SecurityAuditOptions
+Start-DscConfiguration -Path SecurityAuditOptions -Wait -Verbose -Force -Debug
+
+```
+
+##Resources - User Rights Assignments
 ```
 The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
 SeTrustedCredManAccessPrivilege = '' # Access Credential Manager as a trusted caller
@@ -92,3 +140,15 @@ SeShutdownPrivilege = 'Administrators', 'Backup Operators' # Shut down the syste
 SeSyncAgentPrivilege = '' # Synchronize directory service data
 SeTakeOwnershipPrivilege = 'Administrators' # Take ownership of files or other objects
 ```
+
+##Resources - Advanced Audit Policies
+
+For Advanced Auditing to work properly, a security option must be set correctly:
+
+# This setting will render the Base/Basic Audit Policy Settings disabled.  The GUI/MMC will not implement the Audit policy settings defined above.
+# 1 = Enable Advanced Audit Policies, 0 = Disable (only apply basic audit policies)
+# https://support.microsoft.com/en-us/kb/2573113
+HKLM\System\CurrentControlSet\Control\Lsa\SCENoApplyLegacyAuditPolicy = 1
+
+This can be done via the next module that I'll be releasing, or manually from here:
+Local Security Policy >> Local Policies >> Security Options >> Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings = Enabled
