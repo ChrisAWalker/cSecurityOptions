@@ -90,6 +90,99 @@ Start-DscConfiguration -Path SecurityAuditOptions -Wait -Verbose -Force -Debug
 
 ```
 
+```powershell
+configuration LSA
+{
+    Import-DscResource -ModuleName cSecurityOptions
+
+    Node localhost
+    {
+        LSA_SecurityOptions SecOpt
+        {
+            Enable = $true
+            #LSA_SecurityOptions = @{"MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole\SecurityLevel" = "4,1"}
+            LSA_SecurityOptions = @{"MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole\SecurityLevel" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Setup\RecoveryConsole\SetCommand" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AllocateCDRoms" = "1,1"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AllocateDASD" = "1,0"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\AllocateFloppies" = "1,1"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount" = "1,4"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ForceUnlockLogon" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\PasswordExpiryWarning" = "4,14"
+                                     "MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ScRemoveOption" = "1,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorAdmin" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorUser" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLastUserName" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableInstallerDetection" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableSecureUIAPaths" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableUIADesktopToggle" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\EnableVirtualization" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\FilterAdministratorToken" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\InactivityTimeoutSecs" = "4,900"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\LegalNoticeCaption" = "1,MY COMPANY"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\LegalNoticeText" = "7,This computer system is the property of MY COMPANY and is to be used for business purposes. All information, messages, software and hardware created, stored, accessed, received, or used by you through this system is considered to be the sole property of MY COMPANY and can and may be monitored, reviewed, and retained at any time. You should have no expectation that any such information, messages or material will be private. By accessing and using this computer, you acknowledge and consent to such monitoring and information retrieval. By accessing and using this computer, you also agree to comply with all of MY COMPANY policies and standards."
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\MaxDevicePasswordFailedAttempts" = "4,10"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\NoConnectedUser" = "4,3"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\PromptOnSecureDesktop" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ScForceOption" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ShutdownWithoutLogon" = "4,0"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\UndockWithoutLogon" = "4,1"
+                                     "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ValidateAdminCodeSignatures" = "4,0"
+                                     "MACHINE\Software\Policies\Microsoft\Cryptography\ForceKeyProtection" = "4,2"
+                                     "MACHINE\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers\AuthenticodeEnabled" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\AuditBaseObjects" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\CrashOnAuditFail" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\DisableDomainCreds" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\EveryoneIncludesAnonymous" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy\Enabled" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\ForceGuest" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\FullPrivilegeAuditing" = "3,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\LimitBlankPasswordUse" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\LmCompatibilityLevel" = "4,5"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinClientSec" = "4,537395200"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinServerSec" = "4,537395200"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymous" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\RestrictAnonymousSAM" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Lsa\SCENoApplyLegacyAuditPolicy" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers\AddPrinterDrivers" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths\Machine" = "7,System\CurrentControlSet\Control\ProductOptions,System\CurrentControlSet\Control\Server Applications,Software\Microsoft\Windows NT\CurrentVersion"
+                                     "MACHINE\System\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedPaths\Machine" = "7,Software\Microsoft\Windows NT\CurrentVersion\Print,Software\Microsoft\Windows NT\CurrentVersion\Windows,System\CurrentControlSet\Control\Print\Printers,System\CurrentControlSet\Services\Eventlog,Software\Microsoft\OLAP Server,System\CurrentControlSet\Control\ContentIndex,System\CurrentControlSet\Control\Terminal Server,System\CurrentControlSet\Control\Terminal Server\UserConfig,System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration,Software\Microsoft\Windows NT\CurrentVersion\Perflib,System\CurrentControlSet\Services\SysmonLog"
+                                     "MACHINE\System\CurrentControlSet\Control\Session Manager\Kernel\ObCaseInsensitive" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Control\Session Manager\ProtectionMode" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Control\Session Manager\SubSystems\optional" = "7,Posix"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\AutoDisconnect" = "4,15"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableForcedLogOff" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\EnableSecuritySignature" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionPipes" = "7,"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\NullSessionShares" = "7,"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RequireSecuritySignature" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters\RestrictNullSessAccess" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnablePlainTextPassword" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\EnableSecuritySignature" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\RequireSecuritySignature" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\LDAP\LDAPClientIntegrity" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\DisablePasswordChange" = "4,0"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\MaximumPasswordAge" = "4,30"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RequireSignOrSeal" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\RequireStrongKey" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\SealSecureChannel" = "4,1"
+                                     "MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters\SignSecureChannel" = "4,1"
+                                     }
+
+        }
+    }
+}
+
+LSA
+Start-DscConfiguration -Path LSA -Wait -Verbose -Force -Debug
+
+```
+
+
 ##Resources - User Rights Assignments
 ```
 The values must be an array of strings.  The values to the right of the privilege is the default value from Windows Server 2012R2.
