@@ -211,9 +211,7 @@ Configuration AccountSettings
                 EnableGuestAccount           = 0
             }
         }
-
     }
-
 }
 
 AccountSettings
