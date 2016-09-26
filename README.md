@@ -182,6 +182,41 @@ Start-DscConfiguration -Path LSA -Wait -Verbose -Force -Debug
 
 ```
 
+```powershell
+
+Configuration AccountSettings
+{
+    Import-DscResource -ModuleName cSecurityOptions
+
+    Node localhost
+    {
+        AccountAndBasicAuditing AccountSettings
+        {
+            Enable = $true
+            # The hashtable keys below come from secedit export file
+            AccountAndBasicAuditing = @{
+                MinimumPasswordAge           = 1
+                MaximumPasswordAge           = 60
+                MinimumPasswordLength        = 14
+                PasswordComplexity           = 1
+                PasswordHistorySize          = 24
+                LockoutBadCount              = 0
+                RequireLogonToChangePassword = 0
+                ForceLogoffWhenHourExpire    = 0
+                NewAdministratorName         = 'OtherAdministrator'
+                NewGuestName                 = 'OtherGuest'
+                ClearTextPassword            = 0
+                LSAAnonymousNameLookup       = 0
+                EnableAdminAccount           = 1
+                EnableGuestAccount           = 0
+            }
+        }
+    }
+}
+
+AccountSettings
+Start-DscConfiguration -Path AccountSettings -Wait -Verbose -Force -Debug
+```
 
 ##Resources - User Rights Assignments
 ```
