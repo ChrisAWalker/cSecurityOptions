@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Version number of this module.
-ModuleVersion = '3.1'
+ModuleVersion = '3.1.1'
 
 # ID used to uniquely identify this module
 GUID = '26d91aca-5da5-4194-bb53-e3e33b1a6065'
@@ -29,10 +29,16 @@ Copyright = '(c) 2016 Chris Walker. All rights reserved.'
 # Description of the functionality provided by this module
 Description = 'This module is designed to modify Windows security options (Local Security Policy Administrative Tool).  The Local Security Policy
                 is responsible for managing many of the security features of Windows.  This module is built to manage the following commponents:
-                -User Rights Assignment (v1.0)
-                -Advanced Audit Policies (v2.0)
-                -Advanced Audit Options (v2.0)
-                -LSA Security Options (v3.0)
+                -Account Policies:
+                    -Password (v1.0)
+                    -Lockout (v1.0)
+                -Local Policies:
+                    -User Rights Assignment (v1.0)
+                    -Audit Policy [Basic] (v2.0)
+                    -LSA Security Options (v3.0)
+                -Advanced Audit Policies:
+                    -Advanced Audit Policies (v2.0)
+                    -Advanced Audit Options (v2.0)
                 Please visit my GITHUB repo to view the source code and hints on how to leverage this module:
                 https://github.com/ChrisAWalker/cSecurityOptions'
 
@@ -73,16 +79,17 @@ CLRVersion = '4.0'
 # NestedModules = @()
 
 # Functions to export from this module
+# FunctionsToExport = @(Get-TargetResource, Set-TargetResource, Test-TargetResource)
 FunctionsToExport = '*'
 
 # Cmdlets to export from this module
-CmdletsToExport = '*'
+# CmdletsToExport = @()
 
 # Variables to export from this module
-VariablesToExport = '*'
+# VariablesToExport = @()
 
 # Aliases to export from this module
-AliasesToExport = '*'
+# AliasesToExport = @()
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
